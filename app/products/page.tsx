@@ -72,10 +72,15 @@ export default function ProductsPage() {
   const handleDelete = async (productId: string) => {
     if (!confirm("هل تريد حذف هذا المنتج؟")) return;
     try {
+      console.log("Attempting to delete product:", productId);
       await deleteProduct(productId);
+      console.log("Delete successful");
       setProducts(products.filter((p) => p.id !== productId));
     } catch (err: any) {
-      setError(err?.message || "فشل حذف المنتج");
+      console.error("Delete failed:", err);
+      const errorMessage = err?.message || err?.details || "فشل حذف المنتج";
+      setError(`خطأ أثناء الحذف: ${errorMessage}`);
+      alert(`فشل الحذف: ${errorMessage}`);
     }
   };
 

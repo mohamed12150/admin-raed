@@ -67,6 +67,16 @@ export async function updateProduct(id: string, product: any) {
 }
 
 export async function deleteProduct(id: string) {
+  // First, delete related records in product_cutting_methods if they exist
+  try {
+    await supabase
+      .from("product_cutting_methods")
+      .delete()
+      .eq("product_id", id);
+  } catch (err) {
+    console.warn("Could not delete related cutting methods, they might not exist or table is missing:", err);
+  }
+
   const { error } = await supabase
     .from("products")
     .delete()

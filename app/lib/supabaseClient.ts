@@ -4,7 +4,7 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  // keep silent here; runtime will surface errors if env not set
+  console.error("Missing Supabase environment variables. Check your .env.local file.");
 }
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
