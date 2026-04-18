@@ -14,40 +14,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "العنوان والرسالة مطلوبان" }, { status: 400 });
     }
 
-    const appId = process.env.ONESIGNAL_APP_ID;
-    const apiKey = process.env.ONESIGNAL_REST_API_KEY;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-    if (!appId || !apiKey) {
-      return NextResponse.json({ error: "OneSignal غير مُعدّ. أضف ONESIGNAL_APP_ID و ONESIGNAL_REST_API_KEY" }, { status: 500 });
-    }
-
-    const payload: any = {
-      app_id: appId,
-      included_segments: ["All"],
-      headings: { ar: title, en: title },
-      contents: { ar: body, en: body },
-    };
-
-    if (url) {
-      payload.url = url;
-    }
-
-    const response = await fetch("https://api.onesignal.com/notifications", {
+    // Call Supabase Edge Function (API key is stored securely in Supabase secrets)
+    const response = await fetch(`${supabaseUrl}/functions/v1/send-notification-all`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Key ${apiKey}`,
+        "Authorization": `Bearer ${supabaseKey}`,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ title, body, url }),
     });
 
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(`OneSignal Error (${response.status}): ${JSON.stringify(result)} | AppID: ${appId?.slice(0,8)}... | KeyPrefix: ${apiKey?.slice(0,10)}...`);
+      throw new Error(result.error || "فشل الإرسال");
     }
 
-    // Save to Supabase notifications history
+    // Save to notifications history
     await supabase.from("notifications_log").insert([{
       title,
       body,
