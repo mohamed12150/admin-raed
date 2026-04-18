@@ -129,12 +129,13 @@ export default function RootLayout({
             </div>
             <div className="flex-1 px-4 py-4 space-y-2 overflow-y-auto font-bold">
               <NavItem href="/" icon="🏠" label="الرئيسية" />
-              <NavItem href="/orders" icon="🛍️" label="الطلبات" />
+              <NavItem href="/orders" icon="🛍️" label="الطلبات" badge="3" />
               <NavItem href="/products" icon="🥩" label="المنتجات" />
               <NavItem href="/categories" icon="📑" label="الأقسام" />
               <NavItem href="/customers" icon="👥" label="العملاء" />
               <NavItem href="/banners" icon="🖼️" label="الإعلانات" />
               <NavItem href="/cutting-methods" icon="🔪" label="طرق التقطيع" />
+              <NavItem href="/notifications" icon="🔔" label="الإشعارات" />
               <NavItem href="/reports" icon="📊" label="التقارير" />
               <NavItem href="/settings" icon="⚙️" label="الإعدادات" />
             </div>
@@ -180,12 +181,13 @@ export default function RootLayout({
               <NavItem href="/customers" icon="👥" label="العملاء" />
               <NavItem href="/banners" icon="🖼️" label="الإعلانات" />
               <NavItem href="/cutting-methods" icon="🔪" label="طرق التقطيع" />
+              <NavItem href="/notifications" icon="🔔" label="الإشعارات" />
               <NavItem href="/reports" icon="📊" label="التقارير" />
               <NavItem href="/settings" icon="⚙️" label="الإعدادات" />
             </div>
 
             <div className="p-4 border-t border-slate-50">
-              <button 
+              <button
                 onClick={handleLogout} 
                 className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 w-full text-right group hover:bg-red-50 transition-colors"
               >
