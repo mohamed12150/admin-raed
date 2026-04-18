@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(result.errors?.[0] || "فشل الإرسال");
+      throw new Error(`OneSignal Error (${response.status}): ${JSON.stringify(result)} | AppID: ${appId?.slice(0,8)}... | KeyPrefix: ${apiKey?.slice(0,10)}...`);
     }
 
     // Save to Supabase notifications history
