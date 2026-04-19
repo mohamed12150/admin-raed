@@ -38,12 +38,12 @@ export default function SettingsPage() {
           tax_percentage: data.tax_percentage?.toString() || "0",
           contact_phone: data.contact_phone || "",
           is_app_active: data.is_app_active ?? true,
-          rajhi_account: data.rajhi_account || "",
-          rajhi_iban: data.rajhi_iban || "",
-          ahli_account: data.ahli_account || "",
-          ahli_iban: data.ahli_iban || "",
-          inma_account: data.inma_account || "",
-          inma_iban: data.inma_iban || "",
+          rajhi_account: data.bank_rajhi_account || "",
+          rajhi_iban: data.bank_rajhi_iban || "",
+          ahli_account: data.bank_ahli_account || "",
+          ahli_iban: data.bank_ahli_iban || "",
+          inma_account: data.bank_inma_account || "",
+          inma_iban: data.bank_inma_iban || "",
         });
       }
     } catch (err: any) {
@@ -93,12 +93,12 @@ export default function SettingsPage() {
         tax_percentage: taxPercentage,
         contact_phone: formData.contact_phone,
         is_app_active: formData.is_app_active,
-        rajhi_account: formData.rajhi_account,
-        rajhi_iban: formData.rajhi_iban,
-        ahli_account: formData.ahli_account,
-        ahli_iban: formData.ahli_iban,
-        inma_account: formData.inma_account,
-        inma_iban: formData.inma_iban,
+        bank_rajhi_account: formData.rajhi_account,
+        bank_rajhi_iban: formData.rajhi_iban,
+        bank_ahli_account: formData.ahli_account,
+        bank_ahli_iban: formData.ahli_iban,
+        bank_inma_account: formData.inma_account,
+        bank_inma_iban: formData.inma_iban,
       });
 
       setSuccess("تم حفظ الإعدادات بنجاح");
