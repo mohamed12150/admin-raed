@@ -112,9 +112,19 @@ export default function OrdersPage() {
                       </p>
                     </td>
                     <td className="px-6 py-6">
-                      <p className="font-bold text-slate-800 text-sm">
-                        {order.city || "غير محدد"}
-                      </p>
+                      {order.latitude && order.longitude ? (
+                        <a
+                          href={`https://www.google.com/maps?q=${order.latitude},${order.longitude}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-bold text-sm"
+                        >
+                          <span>📍</span>
+                          <span className="underline underline-offset-2">{order.city || order.address || "عرض الموقع"}</span>
+                        </a>
+                      ) : (
+                        <p className="font-bold text-slate-800 text-sm">{order.city || "غير محدد"}</p>
+                      )}
                       <p className="text-[10px] text-slate-400 font-bold mt-1 line-clamp-1 max-w-[150px]" title={order.address}>
                         {order.address || "لا يوجد عنوان"}
                       </p>
